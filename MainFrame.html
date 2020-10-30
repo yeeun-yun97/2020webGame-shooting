@@ -22,17 +22,22 @@
         // canvas
         var context;
         var width = 1000;
-        var height = 700;
+        var height = 640;
         var image = new Image();
-        image.src = "lawn.png";
+        image.src = "images/backGround_pixels.png";
 
         var gameOver = new Image();
-        gameOver.src="images/GameOver.png";
+        gameOver.src="images/GameOver_pixel.png";
         var victory = new Image();
-        victory.src="images/victory.png";
+        victory.src="images/victory_pixel.png";
         var boom = new Image(110,101);
-        boom.src="images/boom.png";
+        boom.src="images/boom_pixel.png";
 
+        var plane = new Image();
+        plane.src="images/plane_pixel.png";
+
+        var ddraw = new Image();
+        ddraw.src="images/Draw_pixel.png";
 
         var timer;
         var timer2;
@@ -108,7 +113,7 @@
         //비행기와 적과 미사일들을 그린다. interval 15
         function draw() {
             context.clearRect(0, 0, width, height);  
-            // drawBackground();
+            drawBackground();
             drawPlane();
             drawEnemy();
             drawMissile();            
@@ -151,38 +156,61 @@
 
         //배경을 그린다. 
         function drawBackground() {
-            for (var i = 0; i < 1000; i+=100){
-                for (var j = 0; j < 700; j +=70){
-                    context.drawImage(image, i, j);        
-                }
-            }            
+            context.drawImage(image,0,0);
+
+
+            // for (var i = 0; i < 1000; i+=100){
+            //     for (var j = 0; j < 700; j +=70){
+            //         context.drawImage(image, i, j);        
+            //     }
+            // }            
         }
 
         function gameSet(resultImage){
-           clearInterval(timer);
-           clearInterval(timer2);
-           clearInterval(timer3); 
-           gamePlaying=false;
-           context.drawImage(resultImage,(width/2)-(resultImage.width/2),(height/2)-(resultImage.height/2));
-       }
+         clearInterval(timer);
+         clearInterval(timer2);
+         clearInterval(timer3); 
+         gamePlaying=false;
+         context.drawImage(resultImage,(width/2)-(resultImage.width/2),(height/2)-(resultImage.height/2));
+     }
+
+
+     function exitGame(){
+        var flag =confirm("게임을 종료하시겠습니까?");
+        if(flag){
+            gameSet(ddraw);
+        }
+    }
 
         ////////////////////////////keyListener//////////////////////////
         function keydownHandler(event) {
 
+            $('#debugArea').text(event.keyCode);
+
             if(!gamePlaying){
-                init();
+                if(confirm("게임을 시작하시겠습니까?"))
+                    init();
             }
 
-            if (event.keyCode == 37) { // leftArrow <-
+             if (event.keyCode == 90) { // z key
+               myPlane.missileLaunch = true;
+            }else if (event.keyCode == 88) { // x key
+                exitGame();
+            }else  if (event.keyCode == 67) { // c key
+                gameMenu();
+            }else if (event.keyCode == 37) { // leftArrow <-
                 myPlane.planeLeftPressed = true;
             } else if (event.keyCode == 39) { // rightArrow ->
                 myPlane.planeRightPressed = true;
             } else if (event.keyCode == 32) { // spaceBar
-                myPlane.missileLaunch = true;
+
             }
         };
+
         function keyupHandler(event) {
-            if (event.keyCode == 37) { // leftArrow <-
+               if (event.keyCode == 90) { // z key
+                   myPlane.missileLaunch = false;
+            }else if (event.keyCode == 37) { // leftArrow <-
                 myPlane.planeLeftPressed = false;
             } else if (event.keyCode == 39) { // rightArrow ->
                 myPlane.planeRightPressed = false;
@@ -190,14 +218,15 @@
                 myPlane.missileLaunch = false;
             }
         };
+
         document.addEventListener("keydown", keydownHandler, false);
         document.addEventListener("keyup", keyupHandler, false);
         ////////////////////////////// object ///////////////////////////
         function Player() {
-            this.width = 70;
-            this.height = 20;
+            this.width = plane.width;
+            this.height = plane.height;
             this.X = 500;
-            this.Y = 680;
+            this.Y = 550;
             this.planeVX = 5;
             this.planeLeftPressed = false;
             this.planeRightPressed = false;
@@ -205,11 +234,9 @@
             this.color = "black";
 
             this.draw = function() {
-                context.beginPath();
-                context.rect(this.X, this.Y, this.width, this.height);
-                context.fillStyle = this.color;
-                context.fill();
+                context.drawImage(plane,this.X,this.Y);
             }
+
             this.move = function() {
                 //영역밖으로 안나간다.
                 if (this.planeLeftPressed && this.X > 0) {
@@ -225,13 +252,13 @@
             }
 
             this.boom = function(){
-             context.drawImage(boom,this.X+(this.width/2)-(boom.width)
-               ,this.Y+(this.height/2)-(boom.height));
-         }          
-     }
+               context.drawImage(boom,this.X+(this.width/2)-(boom.width)
+                 ,this.Y+(this.height/2)-(boom.height));
+           }          
+       }
 
 
-     function Enemy() {
+       function Enemy() {
         this.X = random(0, 1000-70);
         this.Y = random(0, 300-20);
         this.width = 70;
@@ -265,7 +292,7 @@
 
             this.boom = function(){
                 context.drawImage(boom,this.X+(this.width/2)-(boom.width)
-                   ,this.Y+(this.height/2)-(boom.height));
+                 ,this.Y+(this.height/2)-(boom.height));
             }         
         }
 
@@ -303,33 +330,39 @@
                 {
                     object.boom();
                     if (object == myPlane) {
-                       gameSet(gameOver);
-                   } else {
+                     gameSet(gameOver);
+                 } else {
                     const index =enemies.indexOf(object);
                     if(index>-1) enemies.splice(index,1);
                     enemyAlive--;
                     if(enemyAlive===0){
-                       gameSet(victory);
+                     gameSet(victory);
 
-                   }
-               }
-           }
-       }                
-   }
+                 }
+             }
+         }
+     }                
+ }
 
 </script>
 </head>
 <body>
 
-    <canvas id="myCanvas" width="1000px" height="700px"></canvas>
+    <canvas id="myCanvas" width="1000px" height="640px"></canvas>
     
     <script>
-        alert("??");
-       var start = new Image();
-       start.src="images/start.png";
-       document.getElementById('myCanvas').getContext('2d').drawImage(start,0,0);
-   </script>
+     var start = new Image();
+     start.src="images/start_pixel.png";
+     var tempContext = document.getElementById('myCanvas').getContext('2d');
 
-   <!--     <button type="button" onclick="init();">시작</button> -->
+     if(start==null){
+        alert("널이다!!");
+    }else{
+        tempContext.drawImage(start, 0,0);
+    }
+</script>
+
+<div id="debugArea"></div>
+
 </body>
 </html>
