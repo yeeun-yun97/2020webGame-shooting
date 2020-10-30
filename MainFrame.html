@@ -13,7 +13,11 @@
             border: 1px solid black;
         }
     </style>
+
+    <script src= "https://code.jquery.com/jquery-3.5.1.js"></script>
+
     <script>
+
         ////////////////////////////// attribute ///////////////////////////
         // canvas
         var context;
@@ -46,6 +50,13 @@
 
         var gamePlaying= false;
 
+
+
+
+
+        ///////////////////////////////////////
+
+
         function random (min, max){
             return Math.floor(Math.random() * (max - min) + min);
         }
@@ -60,8 +71,6 @@
                 enemyMissile = [];
                 playerMissileIndex = 0;
                 enemyMissileIndex = 0;
-
-
                 context = document.getElementById('myCanvas').getContext('2d'); 
                 myPlane = new Player();
                 createEnemy();
@@ -150,15 +159,20 @@
         }
 
         function gameSet(resultImage){
-         clearInterval(timer);
-         clearInterval(timer2);
-         clearInterval(timer3); 
-         gamePlaying=false;
-         context.drawImage(resultImage,(width/2)-(resultImage.width/2),(height/2)-(resultImage.height/2));
-     }
+           clearInterval(timer);
+           clearInterval(timer2);
+           clearInterval(timer3); 
+           gamePlaying=false;
+           context.drawImage(resultImage,(width/2)-(resultImage.width/2),(height/2)-(resultImage.height/2));
+       }
 
         ////////////////////////////keyListener//////////////////////////
         function keydownHandler(event) {
+
+            if(!gamePlaying){
+                init();
+            }
+
             if (event.keyCode == 37) { // leftArrow <-
                 myPlane.planeLeftPressed = true;
             } else if (event.keyCode == 39) { // rightArrow ->
@@ -211,13 +225,13 @@
             }
 
             this.boom = function(){
-               context.drawImage(boom,this.X+(this.width/2)-(boom.width)
-                 ,this.Y+(this.height/2)-(boom.height));
-           }          
-       }
+             context.drawImage(boom,this.X+(this.width/2)-(boom.width)
+               ,this.Y+(this.height/2)-(boom.height));
+         }          
+     }
 
 
-       function Enemy() {
+     function Enemy() {
         this.X = random(0, 1000-70);
         this.Y = random(0, 300-20);
         this.width = 70;
@@ -251,7 +265,7 @@
 
             this.boom = function(){
                 context.drawImage(boom,this.X+(this.width/2)-(boom.width)
-                 ,this.Y+(this.height/2)-(boom.height));
+                   ,this.Y+(this.height/2)-(boom.height));
             }         
         }
 
@@ -289,24 +303,33 @@
                 {
                     object.boom();
                     if (object == myPlane) {
-                     gameSet(gameOver);
-                 } else {
+                       gameSet(gameOver);
+                   } else {
                     const index =enemies.indexOf(object);
                     if(index>-1) enemies.splice(index,1);
                     enemyAlive--;
                     if(enemyAlive===0){
-                     gameSet(victory);
+                       gameSet(victory);
 
-                 }
-             }
-         }
-     }                
- }
+                   }
+               }
+           }
+       }                
+   }
 
 </script>
 </head>
 <body>
+
     <canvas id="myCanvas" width="1000px" height="700px"></canvas>
-    <button type="button" onclick="init();">시작</button>
+    
+    <script>
+        alert("??");
+       var start = new Image();
+       start.src="images/start.png";
+       document.getElementById('myCanvas').getContext('2d').drawImage(start,0,0);
+   </script>
+
+   <!--     <button type="button" onclick="init();">시작</button> -->
 </body>
 </html>
