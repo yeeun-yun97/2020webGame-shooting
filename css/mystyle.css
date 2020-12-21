@@ -1,0 +1,186 @@
+body {
+    margin-top: none;
+    width: 100%;
+    height: 100%;
+    font-family: "HYPost", serif;
+    font-weight: bold;
+}
+
+body nav ul li {
+    font-family: "Comic Sans MS", serif;
+}
+header {
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 45px;
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+    border-top: 2px dotted white;
+    border-bottom: 2px dashed white;
+    padding: 10px 0;
+}
+
+nav ul li {
+    display: inline;
+    text-transform: uppercase;
+    padding: 0 10px;
+    letter-spacing: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color:whitesmoke;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+aside#left {
+    float: left;
+    text-align: left;
+    padding-left: 10%;
+    margin-bottom: 7%;
+    padding-right: 10%;
+    color: rgb(255, 249, 249);   
+}
+
+#scoreTable {
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    border-top: 1px dotted white;
+    border-bottom: 1px dotted white;
+    margin: 20px 10px;
+    color: white;
+    border-collapse: separate;
+    border-spacing: 1px;
+    line-height: 1.5;
+    width: 20px;
+    letter-spacing: 15px;
+    word-spacing: 10px;    
+    text-decoration-color: white;
+}
+
+#scoreTable tr td {
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    border-top: 1px dotted white;
+    margin: 20px 10px;
+    color: white;
+    border-collapse: separate;
+    border-spacing: 1px;
+    line-height: 1.5;
+    width: 20px;
+    letter-spacing: 15px;
+    word-spacing: 10px;    
+    text-decoration-color: white;
+}
+
+section {
+    margin-top: 3%;
+    margin-left: 10%;
+    padding-top: 10px;
+}
+
+section#contacts {
+    margin-left: 0%;
+    text-align: center;
+    font-family: "휴먼편지체", serif;
+    letter-spacing: 5px;
+    color:black;
+    line-height: 1.5;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+section#aboutus {
+    margin-left: 0%;
+    text-align: center;
+    font-family: "휴먼편지체", serif;
+    letter-spacing: 5px;
+    color:black;
+    line-height: 4;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+section#howto {
+    margin-left: 0%;
+    padding-left: 0%;
+    text-align: center;
+    font-family: "휴먼편지체", serif;
+    letter-spacing: 5px;
+    color:black;
+    line-height: 1;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+section article {
+    border: none;
+    text-align: center;
+    float: left;
+}
+
+section article table {
+    width: 500px;
+    height: 300px;
+    font-size: 12px;
+}
+
+footer {
+    margin-top: 3%;
+    padding-top: 2%;
+    padding-bottom: 200px;
+    font-size: small;
+    text-align: center;
+    margin: auto;
+    clear: both;
+    color: blanchedalmond;
+    
+}
+
+#btn1 {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: -4px;
+}
+#btn2 {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: -4px;
+}
+#btn3 {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: -4px;
+}
+#btn_group button {
+    border: 1px solid seashell;
+    background: rgba(0, 0, 0, 0);
+    color: seashell;
+    padding: 5px;
+}
+
+#btn_group button:hover {
+    color: seashell;
+    background-color: skyblue;
+}
+
+#myCanvas{
+    border: 1px black solid;
+}
