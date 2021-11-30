@@ -4,5 +4,6 @@ webProgrammingTeamProject2020
 간단한 게임 만들기-
 
 html, javascript, css
+https://yeeun-yun97.github.io/2020webGame-shooting/
 
 팀원:박정훈 김기연 윤예은
